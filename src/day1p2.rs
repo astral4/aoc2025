@@ -11,26 +11,26 @@ pub fn main(path: impl AsRef<Path>) -> Result<usize> {
     let input = File::open(path)?.pipe(BufReader::new);
 
     for line in input.lines() {
-        if let Ok(line) = line {
-            if let Some(num) = line.strip_prefix('L') {
-                let change: isize = num.parse()?;
-                let new_pos = pos - change;
-
-                count += div_floor_100(pos - 1) - div_ceil_100(new_pos) + 1;
-
-                pos = new_pos;
-            } else if let Some(num) = line.strip_prefix('R') {
-                let change: isize = num.parse()?;
-                let new_pos = pos + change;
-
-                count += div_floor_100(new_pos) - div_ceil_100(pos + 1) + 1;
-
-                pos = new_pos;
-            } else {
-                bail!("unexpected rotation direction");
-            }
-        } else {
+        let Ok(line) = line else {
             bail!("failed to read line");
+        };
+
+        if let Some(num) = line.strip_prefix('L') {
+            let change: isize = num.parse()?;
+            let new_pos = pos - change;
+
+            count += div_floor_100(pos - 1) - div_ceil_100(new_pos) + 1;
+
+            pos = new_pos;
+        } else if let Some(num) = line.strip_prefix('R') {
+            let change: isize = num.parse()?;
+            let new_pos = pos + change;
+
+            count += div_floor_100(new_pos) - div_ceil_100(pos + 1) + 1;
+
+            pos = new_pos;
+        } else {
+            bail!("unexpected rotation direction");
         }
     }
 
