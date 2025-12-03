@@ -31,7 +31,9 @@ pub fn main(path: impl AsRef<Path>) -> Result<usize> {
                     let positions = &digit_positions[d];
 
                     // Advance pointer past positions < left
-                    while ptrs[d] < positions.len() && positions[ptrs[d]] < left {
+                    while let Some(&pos) = positions.get(ptrs[d])
+                        && pos < left
+                    {
                         ptrs[d] += 1;
                     }
 
