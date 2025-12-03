@@ -5,7 +5,7 @@ use std::io::{BufRead, BufReader};
 use std::path::Path;
 use tap::Pipe;
 
-pub fn main(path: impl AsRef<Path>) -> Result<u32> {
+pub fn main(path: impl AsRef<Path>) -> Result<usize> {
     let mut total = 0;
 
     let input = File::open(path)?.pipe(BufReader::new);
@@ -39,6 +39,7 @@ pub fn main(path: impl AsRef<Path>) -> Result<u32> {
     Ok(total)
 }
 
-fn parse_digit(c: char) -> Result<u32> {
-    c.to_digit(10).ok_or_else(|| Error::msg("invalid digit"))
+fn parse_digit(c: char) -> Result<usize> {
+    c.to_digit(10)
+        .map_or_else(|| Err(Error::msg("invalid digit")), |d| Ok(d as usize))
 }
