@@ -30,7 +30,7 @@ pub fn main(path: impl AsRef<Path>) -> Result<usize> {
                 bail!("unexpected rotation direction");
             }
         } else {
-            bail!("failed to read line")
+            bail!("failed to read line");
         }
     }
 

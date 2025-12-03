@@ -24,7 +24,7 @@ pub fn main(path: impl AsRef<Path>) -> Result<usize> {
                 count += 1;
             }
         } else {
-            bail!("failed to read line")
+            bail!("failed to read line");
         }
     }
 
