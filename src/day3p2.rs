@@ -48,7 +48,7 @@ pub fn main(path: impl AsRef<Path>) -> Result<usize> {
                     }
                 }
 
-                bail!("no valid digit found");
+                bail!("not enough batteries in bank");
             }
         } else {
             bail!("failed to read line");

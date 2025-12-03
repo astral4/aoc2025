@@ -29,7 +29,7 @@ pub fn main(path: impl AsRef<Path>) -> Result<u32> {
 
                 total += parse_digit(first_max)? * 10 + parse_digit(next_max)?;
             } else {
-                bail!("not enough batteries");
+                bail!("not enough batteries in bank");
             }
         } else {
             bail!("failed to read line");
