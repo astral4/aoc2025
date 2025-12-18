@@ -11,10 +11,7 @@ pub fn main(path: impl AsRef<Path>) -> Result<usize> {
     let input = File::open(path)?.pipe(BufReader::new);
 
     for line in input.lines() {
-        let Ok(line) = line else {
-            bail!("failed to read line");
-        };
-
+        let line = line?;
         let mut chars = line.chars().rev();
 
         if let Some(mut next_max) = chars.next()

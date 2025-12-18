@@ -11,9 +11,7 @@ pub fn main(path: impl AsRef<Path>) -> Result<usize> {
     let input = File::open(path)?.pipe(BufReader::new);
 
     for line in input.lines() {
-        let Ok(line) = line else {
-            bail!("failed to read line");
-        };
+        let line = line?;
 
         if let Some(num) = line.strip_prefix('L') {
             let change: isize = num.parse()?;
