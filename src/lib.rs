@@ -6,3 +6,5 @@ pub mod day3p1;
 pub mod day3p2;
 pub mod day4p1;
 pub mod day4p2;
+pub mod day5p1;
+pub mod day5p2;
